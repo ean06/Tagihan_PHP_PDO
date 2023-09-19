@@ -1,0 +1,91 @@
+berikut databasenya :
+
+Pembayaran
+
+#pengguna
+id_pengguna
+nama_lengkap
+email
+handphone
+username
+password
+hak_akses 
+
+#kategori
+id_kategori
+id_pengguna (foreign key)
+kode_kategori
+kategori
+keterangan
+
+#sumber_dana
+id_sumdan
+kode_sumdan
+nama_pendanaan
+nama_bank
+nama_rekening
+nomor_rekening
+status_subdan (pribadi/company)
+
+#tagihan
+id_tagihan
+id_pengguna (foreign key)
+kode_kategori (foreign key)
+nama_tagihan
+rupiah_tagihan
+file_invoice_tagihan
+rekening_tujuan_bank
+rekening_tujuan_nama
+rekening_tujuan_va
+rekening_tujuan_norek
+tagihan_termin  (0=Sekali,1=Bulanan,2=Setiap 2 bulan,3=setiap 3 bulan)
+tanggal_tagihan_now  -> tanggal_jatuh_tempo
+tanggal_tagihan_next
+tanggal_pembayaran
+bukti_pembayaran
+rupiah_pembayaran
+status_tagihan (1=Sudah lunas,0=belum bayar)
+tagihan_keterangan
+
+
+
+# pertanyaan 
+tanya yang di tabel sama yang di website inputannya
+
+- sumber pendanaan -> (tidak ada)
+- kategori -> kode_kategori
+- termin -> tagihan_termin
+- tagihan -> nama_tagihan
+- rupiah -> rupiah_tagihan
+- bank -> (tidak ada)
+- nomor rekening -> rekening_tujuan_norek
+- nama tujuan -> rekening_tujuan_nama
+- tanggal pembayaran -> tanggal_tagihan_now
+- next pembayaran -> tanggal_tagihan_next
+- virtual akun ->(tidak ada)
+
+field yang tidak ada inputan
+- file_invoice_tagihan (blob)
+- rekening_tujuan_bank
+- rekening_tujuan_va (ini maksudnya virtual akun?)
+- tanggal_pembayaran
+- bukti_pembayaran (blob)
+- rupiah_pembayaran
+- status_tagihan
+- tagihan_keterangan
+
+
+
+#revisi
+
+-   foreign key tagihan (kode_kategori) -> kategori (kode_kategori)
+-   termin type data enum ( 0=Sekali, 
+                            1=Setiap 1 Bulanan, 
+                            2=Setiap 2 bulan, 
+                            3=setiap 3 bulan)
+-   nama_tagihan ganti type data varchar
+-   bikin ulang table tagihan sesuai urutan form di website
+-   tanggal_tagihan_now di ganti tanggal_jatuh_tempo
+-   tabel sumber_dana nomor_rekening itu anggka pertamanya ada 0 nya apa ngga (kalo ada ganti varchar) mencakup seluruh yang berhubungan dengan rekening
+-   tabel tagihan kode_kategori type data int sedangkan yang di tabel kategori itu varchar
+-    
